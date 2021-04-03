@@ -26,6 +26,8 @@ library(plotly)
 
 ```
 
+# Prediction
+
 Column {.siderbar, data-width=100}
 -----------------------------------------------------------------------
 
@@ -63,3 +65,10 @@ renderPlotly({
 
 ```
 
+# Filtered Data Visual 
+
+# Filtered Data
+
+# Robby's Blog
+
+# About
