@@ -1,0 +1,65 @@
+---
+title: "Chronic Kidney Disease Prediction"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+
+```{r global, include=FALSE}
+dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)  # create personal library
+.libPaths(Sys.getenv("R_LIBS_USER"))  # add to the path
+
+library(flexdashboard)
+library(shiny)
+ library(leaflet)
+library(reshape2)
+
+library(tidyverse)
+
+library(magrittr); 
+library(dplyr);
+library(ggplot2)
+library(plotly)
+
+```
+
+Column {.siderbar, data-width=100}
+-----------------------------------------------------------------------
+
+### Input: Parameters
+
+```{r}
+
+ checkboxGroupInput("testinput", label = h3("TestInput"), 
+    choices = list("Test1" = 1, "Test2" = 2),
+    selected = 1)
+ 
+ radioButtons("radio", label = h3("TestInput2"),
+    choices = list("Test1" = 1, "Test2" = 2), 
+    selected = 1)
+ 
+ checkboxInput("TestInput3", label = h3("TestInput3"), value = TRUE)
+ 
+ 
+```
+Column {data-width=950}
+-----------------------------------------------------------------------
+
+
+### Data
+
+```{r}
+
+renderPlotly({
+  
+ 
+  
+})
+
+
+
+```
+
