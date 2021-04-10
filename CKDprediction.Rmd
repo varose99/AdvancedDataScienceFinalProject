@@ -28,52 +28,15 @@ library(plotly)
 
 # Prediction
 
-Column {.siderbar, data-width=100}
+Inputs {.sidebar}
 -----------------------------------------------------------------------
 
 ### Input: Parameters
 
-```{r}
-
- checkboxGroupInput("testinput", label = h3("TestInput"), 
-    choices = list("Test1" = 1, "Test2" = 2),
-    selected = 1)
- 
- radioButtons("radio", label = h3("TestInput2"),
-    choices = list("Test1" = 1, "Test2" = 2), 
-    selected = 1)
- 
- checkboxInput("TestInput3", label = h3("TestInput3"), value = TRUE)
- 
- 
-```
-Column {data-width=950}
------------------------------------------------------------------------
-
-
-### Data
-
-```{r}
-
-# data table and formatting
-address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
-raw_data <- read.csv(address)
-entries = raw_data %>% data.matrix()
-
-#renderPlotly({
-#})
-
-
-
-```
-
-# Filtered Data Visual 
-Column {.siderbar, data-width=50}
------------------------------------------------------------------------
-
-### Graphing Parameters
-
 ```{r eruptions, echo=FALSE}
+ address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
+raw_data <- read.csv(address)
+
 inputPanel(
  pickerInput(
   inputId = "x_plotting",
@@ -86,28 +49,54 @@ inputPanel(
   label = "Select Y-Axis",
   choices = colnames(raw_data),
   options = list(`actions-box` = TRUE, size = 15,
-    `selected-text-format` = "count > 3"), multiple = FALSE)
+    `selected-text-format` = "count > 3"), multiple = FALSE),
  
-) 
-```
-Column {data-width=1000}
------------------------------------------------------------------------
-```{r}
-#data <- (data %>% select(c(input$regions, "Date")))
 
-  #x_data = raw_data %>% select(input$x_plotting) %>%  data.matrix()
-  #fig1 <- plot_ly(raw_data, x = ~age, y = ~bp)
-renderPlot({data <- raw_data[, c(input$x_plotting, input$y_plotting)]
+ checkboxGroupInput("testinput", label = h3("TestInput"), 
+    choices = list("Test1" = 1, "Test2" = 2),
+    selected = 1),
+ 
+ radioButtons("radio", label = h3("TestInput2"),
+    choices = list("Test1" = 1, "Test2" = 2), 
+    selected = 1),
+ 
+ checkboxInput("TestInput3", label = h3("TestInput3"), value = TRUE)
+) 
+ 
+```
+
+
+Column {.tabset}
+-------------------------------------
+### Data
+
+```{r}
+# data table and formatting
+address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
+raw_data <- read.csv(address)
+
+#renderPlotly({
+#})
+
+
+
+```
+   
+### Filtered Data Visual
+
+```{r}
+renderPlot({
+  data <- raw_data[, c(input$x_plotting, input$y_plotting)]
     colnames(data) <- c("col1", "col2")
     ggplot(data,aes(x=col1,y=col2)) +
          geom_point(size=2, shape=18, color="blue", alpha=0.4) + 
           geom_smooth(method = 'lm',color = 'red') })
 ```
 
-# Filtered Data
+### Filtered Data
 ```{r}
 
 ```
-# Robby's Blog
+### Robby's Blog
 
-# About
+### About
