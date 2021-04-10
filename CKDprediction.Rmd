@@ -17,6 +17,8 @@ library(shiny)
  library(leaflet)
 library(reshape2)
 library(tidyverse)
+library(shinyWidgets)
+library(dygraphs)
 library(magrittr); 
 library(dplyr);
 library(ggplot2)
@@ -52,10 +54,10 @@ Column {data-width=950}
 ### Data
 
 ```{r}
+
+# data table and formatting
 address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
 raw_data <- read.csv(address)
-
-# linear regression
 entries = raw_data %>% data.matrix()
 
 #renderPlotly({
@@ -66,6 +68,41 @@ entries = raw_data %>% data.matrix()
 ```
 
 # Filtered Data Visual 
+Column {.siderbar, data-width=50}
+-----------------------------------------------------------------------
+
+### Graphing Parameters
+
+```{r eruptions, echo=FALSE}
+inputPanel(
+ pickerInput(
+  inputId = "x_plotting",
+  label = "Select X-Axis",
+  choices = colnames(raw_data),
+  selected = 'age',
+  options = list(`actions-box` = TRUE, size = 15,
+    `selected-text-format` = "count > 3"), multiple = FALSE),
+ pickerInput(
+  inputId = "y_plotting",
+  label = "Select Y-Axis",
+  choices = colnames(raw_data),
+  selected = 'bp',
+  options = list(`actions-box` = TRUE, size = 15,
+    `selected-text-format` = "count > 3"), multiple = FALSE)
+ 
+) 
+```
+Column {data-width=1000}
+-----------------------------------------------------------------------
+```{r, echo = FALSE}
+#data <- (data %>% select(c(input$regions, "Date")))
+
+  #x_data = raw_data %>% select(input$x_plotting) %>%  data.matrix()
+  #fig1 <- plot_ly(raw_data, x = ~age, y = ~bp)
+ggplot(raw_data, aes(x = age, y = bp)) +
+         geom_point(size=2, shape=18, color="blue", alpha=0.4) + 
+          geom_smooth(method = 'lm',color = 'red') 
+```
 
 # Filtered Data
 
