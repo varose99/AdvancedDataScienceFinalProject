@@ -96,7 +96,7 @@ renderPlot({
     if (input$regression){
       ggplot(data,aes(x=col1,y=col2, color = col3)) +
          geom_point(size=2, shape=18, alpha=0.4) + 
-          geom_smooth(method = 'lm',color = 'red')+
+          geom_smooth(method = 'lm',alpha=0.2,size = 1.2,color = 'darkseagreen4')+
           geom_rug(alpha=0.1, size=1.5)+ 
         scale_color_gradient(low="blue", high="red")
       
