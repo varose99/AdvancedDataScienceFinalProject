@@ -16,9 +16,7 @@ library(flexdashboard)
 library(shiny)
  library(leaflet)
 library(reshape2)
-
 library(tidyverse)
-
 library(magrittr); 
 library(dplyr);
 library(ggplot2)
@@ -54,12 +52,14 @@ Column {data-width=950}
 ### Data
 
 ```{r}
+address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
+raw_data <- read.csv(address)
 
-renderPlotly({
-  
- 
-  
-})
+# linear regression
+entries = raw_data %>% data.matrix()
+
+#renderPlotly({
+#})
 
 
 
