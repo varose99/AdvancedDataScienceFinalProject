@@ -50,6 +50,12 @@ inputPanel(
   choices = colnames(raw_data),
   options = list(`actions-box` = TRUE, size = 15,
     `selected-text-format` = "count > 3"), multiple = FALSE),
+ pickerInput(
+  inputId = "coloring",
+  label = "Select Colorization",
+  choices = colnames(raw_data),
+  options = list(`actions-box` = TRUE, size = 15,
+    `selected-text-format` = "count > 3"), multiple = FALSE),
  
 
  checkboxGroupInput("testinput", label = h3("TestInput"), 
@@ -60,7 +66,7 @@ inputPanel(
     choices = list("Test1" = 1, "Test2" = 2), 
     selected = 1),
  
- checkboxInput("TestInput3", label = h3("TestInput3"), value = TRUE)
+ checkboxInput("regression", label = h3("Regression Line"), value = TRUE)
 ) 
  
 ```
@@ -79,18 +85,28 @@ raw_data <- read.csv(address)
 #})
 
 
-
 ```
    
 ### Filtered Data Visual
 
 ```{r}
 renderPlot({
-  data <- raw_data[, c(input$x_plotting, input$y_plotting)]
-    colnames(data) <- c("col1", "col2")
-    ggplot(data,aes(x=col1,y=col2)) +
-         geom_point(size=2, shape=18, color="blue", alpha=0.4) + 
-          geom_smooth(method = 'lm',color = 'red') })
+  data <- raw_data[, c(input$x_plotting, input$y_plotting, input$coloring)]
+    colnames(data) <- c("col1", "col2","col3")
+    if (input$regression){
+      ggplot(data,aes(x=col1,y=col2, color = col3)) +
+         geom_point(size=2, shape=18, alpha=0.4) + 
+          geom_smooth(method = 'lm',color = 'red')+
+          geom_rug(alpha=0.1, size=1.5)+ 
+        scale_color_gradient(low="blue", high="red")
+      
+    } else {
+      ggplot(data,aes(x=col1,y=col2, color = col3)) +
+         geom_point(size=2, shape=18, alpha=0.4) + 
+          geom_rug(alpha=0.1, size=1.5)+ 
+        scale_color_gradient(low="blue", high="red")
+        }
+})
 ```
 
 ### Filtered Data
