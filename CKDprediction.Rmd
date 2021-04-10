@@ -79,14 +79,12 @@ inputPanel(
   inputId = "x_plotting",
   label = "Select X-Axis",
   choices = colnames(raw_data),
-  selected = 'age',
   options = list(`actions-box` = TRUE, size = 15,
     `selected-text-format` = "count > 3"), multiple = FALSE),
  pickerInput(
   inputId = "y_plotting",
   label = "Select Y-Axis",
   choices = colnames(raw_data),
-  selected = 'bp',
   options = list(`actions-box` = TRUE, size = 15,
     `selected-text-format` = "count > 3"), multiple = FALSE)
  
@@ -94,18 +92,22 @@ inputPanel(
 ```
 Column {data-width=1000}
 -----------------------------------------------------------------------
-```{r, echo = FALSE}
+```{r}
 #data <- (data %>% select(c(input$regions, "Date")))
 
   #x_data = raw_data %>% select(input$x_plotting) %>%  data.matrix()
   #fig1 <- plot_ly(raw_data, x = ~age, y = ~bp)
-ggplot(raw_data, aes(x = age, y = bp)) +
+renderPlot({data <- raw_data[, c(input$x_plotting, input$y_plotting)]
+    colnames(data) <- c("col1", "col2")
+    ggplot(data,aes(x=col1,y=col2)) +
          geom_point(size=2, shape=18, color="blue", alpha=0.4) + 
-          geom_smooth(method = 'lm',color = 'red') 
+          geom_smooth(method = 'lm',color = 'red') })
 ```
 
 # Filtered Data
+```{r}
 
+```
 # Robby's Blog
 
 # About
