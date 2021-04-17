@@ -26,7 +26,7 @@ library(plotly)
 
 ```
 
-# Prediction
+# Raw Data
 
 Inputs {.sidebar}
 -----------------------------------------------------------------------
@@ -110,6 +110,46 @@ renderPlot({
 ```{r}
 
 ```
-### Robby's Blog
 
 ### About
+
+# Prediction
+
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+
+### Input: Parameters
+
+```{r}
+inputPanel(
+numericInput(
+  "age",
+  "Enter your Age",
+  value = 40,
+  min = 0,
+  max = 120,
+),
+
+numericInput(
+  "bp",
+  "Enter your Blood Pressure",
+  value = 120,
+  min = 0,
+  max = 400,
+),
+actionButton("run", "Calculate Risk")
+)
+```
+
+
+Column {.tabset}
+-------------------------------------
+### Disclaimer
+```{r}
+
+```
+
+### Predicion
+```{r}
+
+```
