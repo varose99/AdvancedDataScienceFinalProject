@@ -57,16 +57,13 @@ inputPanel(
   options = list(`actions-box` = TRUE, size = 15,
     `selected-text-format` = "count > 3"), multiple = FALSE),
  
-
- checkboxGroupInput("testinput", label = h3("TestInput"), 
-    choices = list("Test1" = 1, "Test2" = 2),
+ radioButtons("scale", label = h3("Scale"),
+    choices = list("Linear" = 1, "Logarithmic" = 2), 
     selected = 1),
  
- radioButtons("radio", label = h3("TestInput2"),
-    choices = list("Test1" = 1, "Test2" = 2), 
-    selected = 1),
+ checkboxInput("regression", label = h3("Regression Line"), value = TRUE),
  
- checkboxInput("regression", label = h3("Regression Line"), value = TRUE)
+ actionButton("show", "Display")
 ) 
  
 ```
