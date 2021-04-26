@@ -26,7 +26,8 @@ for (i in 1:length(test$class)) {
 }
 print(1 - (err/length(test$class)))
 
-
+# Actual code to save the model to be used, everything above is for testing
+rf_model <- randomForest(filtered_data[ ,-25], as.factor(filtered_data[ ,25]))
 save(rf_model, file="randomForestModel.Rdata")
 
 
