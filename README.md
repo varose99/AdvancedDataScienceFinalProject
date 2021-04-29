@@ -43,6 +43,10 @@ Desktop:
 
 4) Run Document
 
+## Example
+
+See How-To run app section above.
+
 
 ## Individual Contributions
 
