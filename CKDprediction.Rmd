@@ -23,7 +23,7 @@ library(magrittr);
 library(dplyr);
 library(ggplot2)
 library(plotly)
-
+library(randomForest)
 ```
 
 # Prediction
@@ -64,7 +64,36 @@ inputPanel(
  checkboxInput("regression", label = h3("Regression Line"), value = TRUE),
  
  actionButton("show", "Display")
-) 
+)
+
+inputPanel(
+ numericInput("age", label = h3("Age for predict:"), value = 1),
+ numericInput("bp", label = h3("BP for predict:"), value = 1),
+ numericInput("sg", label = h3("SG for predict:"), value = 1),
+ numericInput("al", label = h3("AL for predict:"), value = 1),
+ numericInput("su", label = h3("SU for predict:"), value = 1),
+ numericInput("rbc", label = h3("RBC for predict:"), value = 1),
+ numericInput("pc", label = h3("PC for predict:"), value = 1),
+ numericInput("pcc", label = h3("PCC for predict:"), value = 1),
+ numericInput("ba", label = h3("BA for predict:"), value = 1),
+ numericInput("bgr", label = h3("BGR for predict:"), value = 1),
+ numericInput("bu", label = h3("BU for predict:"), value = 1),
+ numericInput("sc", label = h3("SC for predict:"), value = 1),
+ numericInput("sod", label = h3("SOD for predict:"), value = 1),
+ numericInput("pot", label = h3("POT for predict:"), value = 1),
+ numericInput("hemo", label = h3("Hemo for predict:"), value = 1),
+ numericInput("pcv", label = h3("PCV for predict:"), value = 1),
+ numericInput("wbcc", label = h3("WBCC for predict:"), value = 1),
+ numericInput("rbcc", label = h3("RBCC for predict:"), value = 1),
+ numericInput("htn", label = h3("HTN for predict:"), value = 1),
+ numericInput("dm", label = h3("DM for predict:"), value = 1),
+ numericInput("cad", label = h3("CAD for predict:"), value = 1),
+ numericInput("appet", label = h3("Appet for predict:"), value = 1),
+ numericInput("pe", label = h3("PE for predict:"), value = 1),
+ numericInput("ane", label = h3("ANE for predict:"), value = 1),
+
+ actionButton("show", "Predict")
+)
  
 ```
 
@@ -119,7 +148,7 @@ Prediction
 
 Timothy Bedard: 
 
-Jay Mandavilli:
+Jay Mandavilli: predictive models
 
 Tori Rose:
 
@@ -177,6 +206,29 @@ renderPlot({
 ```{r}
 
 ```
+
+### Predict
+```{r}
+trainModel <- function() {
+  filtered_data <- raw_data[rowSums(is.na(raw_data[ , 1:25])) == 0, ]
+  rf_model <- randomForest(filtered_data[ ,-25], as.factor(filtered_data[ ,25]))
+  
+  predict_input <- data.frame(input$age, input$bp, input$sg, input$al, input$su, input$rbc, input$pc, input$pcc, input$ba, input$bgr, input$bu, input$sc, input$sod, input$pot, input$hemo, input$pcv, input$wbcc, input$rbcc, input$htn, input$dm, input$cad, input$appet, input$pe, input$ane, 0)
+  filtered_data[nrow(filtered_data) + 1,] = predict_input
+  names(predict_input) <- names(filtered_data)
+
+  output <- predict(rf_model, predict_input[1, 1:24])
+  output <- as.character(output)
+  if (output == "1") {
+    print("Yes")
+  } else {
+    print("No")
+  }
+}
+
+renderPrint(trainModel())
+```
+
 ### Robby's Blog
 
 
