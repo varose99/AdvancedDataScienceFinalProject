@@ -52,7 +52,7 @@ See How-To run app section above.
 
 Timothy Bedard: 
 
-Jay Mandavilli:
+Jay Mandavilli: predictive models
 
 Tori Rose: data filtering and visualization
 
