@@ -50,7 +50,7 @@ Timothy Bedard:
 
 Jay Mandavilli:
 
-Tori Rose: Data filtering and visualization
+Tori Rose: data filtering and visualization
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
