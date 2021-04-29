@@ -18,7 +18,7 @@ Package requirements: methods, stats, utils, grDevices, graphics, datasets, base
 
 System Requirements/Environments: This App compiled with RStudio.cloud but will also work with desktop versions of RStudio.
 
-How-to-Use Documentation provided in the app.
+How-to-Use Documentation provided in the app (see app link above).
 
 ## How-to
 
