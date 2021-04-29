@@ -52,7 +52,7 @@ Jay Mandavilli:
 
 Tori Rose:
 
-Benjamin Straus: readme, documentation page, app descriptions and how-tos
+Benjamin Straus: readme, app description and how-tos, documentation page
 
 Robby Waxman: data selection and data pre-processing
 
