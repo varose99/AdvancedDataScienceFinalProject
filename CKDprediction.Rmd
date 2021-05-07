@@ -36,28 +36,35 @@ raw_data <- read.csv(address)
 Inputs {.sidebar}
 -----------------------------------------------------------------------
 
-### Input: Parameters
+### Input Parameters
 
 ```{r eruptions, echo=FALSE}
 inputPanel(
+  # x range selection
  pickerInput(
   inputId = "x_plotting",
   label = "Select X-Axis",
   choices = colnames(raw_data),
   options = list(`actions-box` = TRUE, size = 15,
     `selected-text-format` = "count > 3"), multiple = FALSE),
+ # reactive fix needed
+ uiOutput("range_x"),
+ # y range selection
  pickerInput(
   inputId = "y_plotting",
   label = "Select Y-Axis",
   choices = colnames(raw_data),
   options = list(`actions-box` = TRUE, size = 15,
     `selected-text-format` = "count > 3"), multiple = FALSE),
+ uiOutput("range_y"),
+ # coloring selection
  pickerInput(
   inputId = "coloring",
   label = "Select Colorization",
   choices = colnames(raw_data),
   options = list(`actions-box` = TRUE, size = 15,
     `selected-text-format` = "count > 3"), multiple = FALSE),
+ uiOutput("range_colors"),
  
  radioButtons("scale", label = h3("Scale"),
     choices = list("Linear" = 1, "Logarithmic" = 2), 
@@ -124,7 +131,7 @@ Timothy Bedard:
 
 Jay Mandavilli: predictive models
 
-Tori Rose:filtered data: selection, table, visual
+Tori Rose:filtered data: selection, table, visualization
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
@@ -148,17 +155,39 @@ Arora, M., & Sharma, E. A. (2016). Chronic Kidney Disease Detection by Analyzing
 address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
 raw_data <- read.csv(address)
 
-#renderPlotly({
-#})
-
 
 ```
    
 ### Filtered Data Visual
 
 ```{r}
+# reactive range filter selection menu:
+# default range is from Q1 - Q3
+output$range_x <- renderUI({
+   x_vals <- na.omit(raw_data[, c(input$x_plotting)])
+   quants <- quantile(x_vals)
+  sliderInput("x_range", label = h3(input$x_plotting), min = min(x_vals), 
+        max = max(x_vals), value = c(unname(quants[2]), unname(quants[4])))
+})
+output$range_y <- renderUI({
+   y_vals <- na.omit(raw_data[, c(input$y_plotting)])
+   quants <- quantile(y_vals)
+  sliderInput("y_range", label = h3(input$y_plotting), min = min(y_vals), 
+        max = max(y_vals), value = c(unname(quants[2]), unname(quants[4])))
+})
+output$range_colors <- renderUI({
+   z_vals <- na.omit(raw_data[, c(input$coloring)])
+   quants <- quantile(z_vals)
+  sliderInput("colors_range", label = h3(input$coloring), min = min(z_vals), 
+        max = max(z_vals), value = c(unname(quants[2]), unname(quants[4])))
+})
+
 renderPlot({
-  data <- raw_data[, c(input$x_plotting, input$y_plotting, input$coloring)]
+  plot_data <- raw_data[, c(input$x_plotting, input$y_plotting, input$coloring)]
+  data <- plot_data %>% filter(plot_data > input$x_range[1] & plot_data < input$x_range[2] &
+                                     plot_data > input$y_range[1] & plot_data < input$y_range[2] &
+                                     plot_data > input$colors_range[1] & plot_data < input$colors_range[2])
+  #data <- filter(data, x_plotting)
     colnames(data) <- c("col1", "col2","col3")
     if (input$regression){
       ggplot(data,aes(x=col1,y=col2, color = col3)) +
@@ -178,6 +207,16 @@ renderPlot({
 
 ### Filtered Data
 ```{r}
+tableOutput('filtered_entries')
+
+output$filtered_entries <- renderTable(
+
+   database <- raw_data %>% filter(raw_data > input$x_range[1] & raw_data < input$x_range[2] &
+                                     raw_data > input$y_range[1] & raw_data < input$y_range[2] &
+                                     raw_data > input$colors_range[1] & raw_data < input$colors_range[2])
+
+  )
+
 
 ```
 
