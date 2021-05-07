@@ -24,9 +24,14 @@ library(dplyr);
 library(ggplot2)
 library(plotly)
 library(randomForest)
+
+ address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
+raw_data <- read.csv(address)
+
 ```
 
-# Prediction
+
+# Data Overview
 
 Inputs {.sidebar}
 -----------------------------------------------------------------------
@@ -34,9 +39,6 @@ Inputs {.sidebar}
 ### Input: Parameters
 
 ```{r eruptions, echo=FALSE}
- address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
-raw_data <- read.csv(address)
-
 inputPanel(
  pickerInput(
   inputId = "x_plotting",
@@ -66,34 +68,6 @@ inputPanel(
  actionButton("show", "Display")
 )
 
-inputPanel(
- numericInput("age", label = h3("Age for predict:"), value = 1),
- numericInput("bp", label = h3("BP for predict:"), value = 1),
- numericInput("sg", label = h3("SG for predict:"), value = 1),
- numericInput("al", label = h3("AL for predict:"), value = 1),
- numericInput("su", label = h3("SU for predict:"), value = 1),
- numericInput("rbc", label = h3("RBC for predict:"), value = 1),
- numericInput("pc", label = h3("PC for predict:"), value = 1),
- numericInput("pcc", label = h3("PCC for predict:"), value = 1),
- numericInput("ba", label = h3("BA for predict:"), value = 1),
- numericInput("bgr", label = h3("BGR for predict:"), value = 1),
- numericInput("bu", label = h3("BU for predict:"), value = 1),
- numericInput("sc", label = h3("SC for predict:"), value = 1),
- numericInput("sod", label = h3("SOD for predict:"), value = 1),
- numericInput("pot", label = h3("POT for predict:"), value = 1),
- numericInput("hemo", label = h3("Hemo for predict:"), value = 1),
- numericInput("pcv", label = h3("PCV for predict:"), value = 1),
- numericInput("wbcc", label = h3("WBCC for predict:"), value = 1),
- numericInput("rbcc", label = h3("RBCC for predict:"), value = 1),
- numericInput("htn", label = h3("HTN for predict:"), value = 1),
- numericInput("dm", label = h3("DM for predict:"), value = 1),
- numericInput("cad", label = h3("CAD for predict:"), value = 1),
- numericInput("appet", label = h3("Appet for predict:"), value = 1),
- numericInput("pe", label = h3("PE for predict:"), value = 1),
- numericInput("ane", label = h3("ANE for predict:"), value = 1),
-
- actionButton("show", "Predict")
-)
  
 ```
 
@@ -207,6 +181,117 @@ renderPlot({
 
 ```
 
+
+
+### Robby's Blog
+
+# Prediction
+
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+
+### Input: Parameters
+
+```{r, echo=FALSE}
+inputPanel(
+ numericInput("age", label = h3("Age for predict:"), value = 1),
+ numericInput("bp", label = h3("BP for predict:"), value = 1),
+ numericInput("sg", label = h3("SG for predict:"), value = 1),
+ numericInput("al", label = h3("AL for predict:"), value = 1),
+ numericInput("su", label = h3("SU for predict:"), value = 1),
+ numericInput("rbc", label = h3("RBC for predict:"), value = 1),
+ numericInput("pc", label = h3("PC for predict:"), value = 1),
+ numericInput("pcc", label = h3("PCC for predict:"), value = 1),
+ numericInput("ba", label = h3("BA for predict:"), value = 1),
+ numericInput("bgr", label = h3("BGR for predict:"), value = 1),
+ numericInput("bu", label = h3("BU for predict:"), value = 1),
+ numericInput("sc", label = h3("SC for predict:"), value = 1),
+ numericInput("sod", label = h3("SOD for predict:"), value = 1),
+ numericInput("pot", label = h3("POT for predict:"), value = 1),
+ numericInput("hemo", label = h3("Hemo for predict:"), value = 1),
+ numericInput("pcv", label = h3("PCV for predict:"), value = 1),
+ numericInput("wbcc", label = h3("WBCC for predict:"), value = 1),
+ numericInput("rbcc", label = h3("RBCC for predict:"), value = 1),
+ numericInput("htn", label = h3("HTN for predict:"), value = 1),
+ numericInput("dm", label = h3("DM for predict:"), value = 1),
+ numericInput("cad", label = h3("CAD for predict:"), value = 1),
+ numericInput("appet", label = h3("Appet for predict:"), value = 1),
+ numericInput("pe", label = h3("PE for predict:"), value = 1),
+ numericInput("ane", label = h3("ANE for predict:"), value = 1),
+
+ actionButton("show", "Predict")
+)
+ 
+```
+Column {.tabset}
+-------------------------------------
+
+### About / How-to
+
+**Introduction**
+
+This project was designed to demonstrate our knowledge of data science which includes obtaining data from a study, pre-processing that data into a usable form, analyzing the data and designing an app that can be powered by the data, creating a shiny web app that uses the data, train a classifier on the data, and finally make a prediction using that classifier. Overall, this process well encapsulates standard procedures with data and visualization that are used to make well-corroborated conclusions that would be reconcluded if the same raw data were given to another group. This is an essential part of data science.
+
+**Data**
+
+Our project specifically uses data from 250 participants with chronic kidney disease (CKD) and 150 without CKD. The data contains 24 features plus the classification feature (whether the participant has CKD). Of these, 11 are numeric (e.g. BMI=20.4) and 14 are nominal (e.g. red blood cells=[normal, abnormal]). The features include age, blood pressure, specific gravity, albumin, sugar, red blood cells, pus cell, pus cell clumps, bacteria, blood glucose random, blood urea, serum creatinine, sodium, potassium, hemoglobin, packed cell volume, white bloodcell count, red blood cell count, hypertension, diabetes mellitus,  coronary artery disease, appetite, pedal edema, anemia, and finally CKD. This data is from Dr. P. Soundarapandian M.D. et al. (2015).
+
+**App Description**
+
+Live App Link:
+
+This app plots data of patients with Chronic Kidney Disease (CKD) and makes a prediction of CKD given data using a classifying model on the CKD data.
+
+Package requirements: methods, stats, utils, grDevices, graphics, datasets, base, flexdashboard, shiny, leaflet, reshape2, tidyverse, shinyWidgets, dygraphs, magrittr, dplyr, ggplot2, plotly
+
+System Requirements/Environments: This App compiled with RStudio.cloud but will also work with desktop versions of RStudio.
+
+
+**How to Use the App**
+
+Data Visualization
+
+1) Select data to display on the left hand side
+
+2) Click "Display"
+
+3) Use page tabs to choose what type of visual you wish to see.
+
+
+Prediction
+
+1) Click "Prediction" in top tab
+
+2) Enter data in the left tab to be used in the prediction
+
+3) Click "Predict"
+
+4) Results displayed in the right panel
+
+
+
+**Individual Contributions**
+
+Timothy Bedard: 
+
+Jay Mandavilli: predictive models
+
+Tori Rose:
+
+Benjamin Straus: readme, app description and how-tos, documentation page
+
+Robby Waxman: data selection and data pre-processing
+
+
+**Disclaimer**
+
+This app was designed as a project and should not be used for medical diagnoses. Please contact your doctor if you have concerns, or call 9-1-1 for emergencies. 
+
+
+**References**
+
+Arora, M., & Sharma, E. A. (2016). Chronic Kidney Disease Detection by Analyzing Medical Datasets in Weka. International Journal of Computer Application, 6(4), 20–26.
+
 ### Predict
 ```{r}
 trainModel <- function() {
@@ -216,20 +301,15 @@ trainModel <- function() {
   predict_input <- data.frame(input$age, input$bp, input$sg, input$al, input$su, input$rbc, input$pc, input$pcc, input$ba, input$bgr, input$bu, input$sc, input$sod, input$pot, input$hemo, input$pcv, input$wbcc, input$rbcc, input$htn, input$dm, input$cad, input$appet, input$pe, input$ane, 0)
   filtered_data[nrow(filtered_data) + 1,] = predict_input
   names(predict_input) <- names(filtered_data)
-
+  
   output <- predict(rf_model, predict_input[1, 1:24])
   output <- as.character(output)
   if (output == "1") {
-    print("Yes")
+    print("Model predicts CKD (chronic kidney disease)")
   } else {
-    print("No")
+    print("Model predicts no kidney disease")
   }
 }
 
 renderPrint(trainModel())
 ```
-
-### Robby's Blog
-
-
-
