@@ -124,7 +124,7 @@ Timothy Bedard:
 
 Jay Mandavilli: predictive models
 
-Tori Rose:
+Tori Rose:filtered data: selection, table, visual
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
