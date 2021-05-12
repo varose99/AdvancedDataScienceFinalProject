@@ -24,6 +24,7 @@ library(dplyr);
 library(ggplot2)
 library(plotly)
 library(randomForest)
+library(DT)
 
  address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
 raw_data <- read.csv(address)
@@ -70,9 +71,8 @@ inputPanel(
     choices = list("Linear" = 1, "Logarithmic" = 2), 
     selected = 1),
  
- checkboxInput("regression", label = h3("Regression Line"), value = TRUE),
- 
- actionButton("show", "Display")
+ checkboxInput("regression", label = h3("Regression Line"), value = TRUE)
+
 )
 
  
@@ -127,7 +127,7 @@ Prediction
 
 **Individual Contributions**
 
-Timothy Bedard: 
+Timothy Bedard: Sidebar, datatable, and structure
 
 Jay Mandavilli: predictive models
 
@@ -151,9 +151,27 @@ Arora, M., & Sharma, E. A. (2016). Chronic Kidney Disease Detection by Analyzing
 ### Data
 
 ```{r}
+
+macroFeats <- function(x) {
+  x<-x[!is.na(x)]
+  return(c(mean=mean(x), median=median(x), range=(max(x)-min(x))))
+}
 # data table and formatting
 address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
 raw_data <- read.csv(address)
+
+```
+### Filtered Data Table
+
+```{r}
+
+show_df = data.frame(sapply(raw_data, macroFeats))
+show_df_transpose <- as.data.frame(t(as.matrix(show_df)))
+#renderPlotly({
+#})
+DT::renderDataTable({
+    show_df_transpose
+  })
 
 
 ```
@@ -189,7 +207,23 @@ renderPlot({
                                      plot_data > input$colors_range[1] & plot_data < input$colors_range[2])
   #data <- filter(data, x_plotting)
     colnames(data) <- c("col1", "col2","col3")
+    if(input$scale == 2) {
     if (input$regression){
+      ggplot(data,aes(x=log10(col1),y=log10(col2), color = col3)) +
+         geom_point(size=2, shape=18, alpha=0.4) + 
+          geom_smooth(method = 'lm',alpha=0.2,size = 1.2,color = 'darkseagreen4')+
+          geom_rug(alpha=0.1, size=1.5)+ 
+        scale_color_gradient(low="blue", high="red")
+      
+    } else {
+      ggplot(data,aes(x=log10(col1),y=log10(col2), color = col3)) +
+         geom_point(size=2, shape=18, alpha=0.4) + 
+          geom_rug(alpha=0.1, size=1.5)+ 
+        scale_color_gradient(low="blue", high="red")
+    }
+    }
+    else{
+      if (input$regression){
       ggplot(data,aes(x=col1,y=col2, color = col3)) +
          geom_point(size=2, shape=18, alpha=0.4) + 
           geom_smooth(method = 'lm',alpha=0.2,size = 1.2,color = 'darkseagreen4')+
@@ -217,9 +251,7 @@ output$filtered_entries <- renderTable(
 
   )
 
-
 ```
-
 
 
 ### Robby's Blog
@@ -266,7 +298,6 @@ Column {.tabset}
 -------------------------------------
 
 ### About / How-to
-
 **Introduction**
 
 This project was designed to demonstrate our knowledge of data science which includes obtaining data from a study, pre-processing that data into a usable form, analyzing the data and designing an app that can be powered by the data, creating a shiny web app that uses the data, train a classifier on the data, and finally make a prediction using that classifier. Overall, this process well encapsulates standard procedures with data and visualization that are used to make well-corroborated conclusions that would be reconcluded if the same raw data were given to another group. This is an essential part of data science.
@@ -311,11 +342,11 @@ Prediction
 
 **Individual Contributions**
 
-Timothy Bedard: 
+Timothy Bedard: Sidebar, datatable, and structure
 
 Jay Mandavilli: predictive models
 
-Tori Rose:
+Tori Rose:filtered data: selection, table, visual
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
@@ -343,12 +374,22 @@ trainModel <- function() {
   
   output <- predict(rf_model, predict_input[1, 1:24])
   output <- as.character(output)
-  if (output == "1") {
-    print("Model predicts CKD (chronic kidney disease)")
+  
+  if(output == "1") {
+    outTxt = "Model predicts CKD (chronic kidney disease)"
   } else {
-    print("Model predicts no kidney disease")
+    outTxt = "Model predicts no chronic kidney disease"
   }
+  return(outTxt)
+  
 }
 
-renderPrint(trainModel())
+renderText(trainModel())
+
+
+```
+
+### Model Performance
+```{r}
+
 ```
