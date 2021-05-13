@@ -139,7 +139,7 @@ Tori Rose:filtered data: range selection, filtered table + visualization; predic
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
-Robby Waxman: data selection and data pre-processing
+Robby Waxman: data selection and data pre-processing, model performance
 
 
 **Disclaimer**
@@ -352,7 +352,7 @@ Tori Rose:filtered data: range selection, filtered table + visualization; predic
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
-Robby Waxman: data selection and data pre-processing
+Robby Waxman: data selection and data pre-processing, model performance
 
 
 **Disclaimer**
