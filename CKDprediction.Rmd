@@ -25,6 +25,7 @@ library(ggplot2)
 library(plotly)
 library(randomForest)
 library(DT)
+library(ROCR)
 
  address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
 raw_data <- read.csv(address)
@@ -314,9 +315,22 @@ Arora, M., & Sharma, E. A. (2016). Chronic Kidney Disease Detection by Analyzing
 ### Predict
 ```{r}
 trainModel <- function() {
-  filtered_data <- raw_data[rowSums(is.na(raw_data[ , 1:25])) == 0, ]
-  rf_model <- randomForest(filtered_data[ ,-25], as.factor(filtered_data[ ,25]))
   
+  # set.seed(4)
+  filtered_data <- raw_data[rowSums(is.na(raw_data[ , 1:25])) == 0, ]
+  # 
+  # test_inds <- sample(1:nrow(filtered_data), floor(0.2 * nrow(filtered_data)))
+  # train <- filtered_data[-test_inds, ]
+  # test <- filtered_data[test_inds, ]
+  # 
+  # rf_model <- randomForest(train[ ,-25], as.factor(train[ ,25]), test[ ,-25], as.factor(test[ ,25]), keep.forest=TRUE)
+  # 
+  # predictions <- as.numeric(predict(rf_model, test[,-25], type = 'response'))
+  # pred <- prediction(predictions, test$class)
+  # perf <- performance(pred, measure = "tpr", x.measure = "fpr")
+  # auc <- unlist(performance(pred,"auc")@y.values)
+  
+  load("randomForestModel.Rdata")
   predict_input <- data.frame(input$age, input$bp, input$sg, input$al, input$su, input$rbc, input$pc, input$pcc, input$ba, input$bgr, input$bu, input$sc, input$sod, input$pot, input$hemo, input$pcv, input$wbcc, input$rbcc, input$htn, input$dm, input$cad, input$appet, input$pe, input$ane, 0)
   filtered_data[nrow(filtered_data) + 1,] = predict_input
   names(predict_input) <- names(filtered_data)
@@ -340,5 +354,7 @@ renderText(trainModel())
 
 ### Model Performance
 ```{r}
-
+load("perf.Rdata")
+load("auc.Rdata")
+renderPlot(plot(perf, main = paste0("ROC Curve for Classifier on Held Out Test Data", "\n(AUC for Classifier on Held Out Test Data: ", format(auc, digits = 5),")"), col=rainbow(10)))
 ```
