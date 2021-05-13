@@ -41,6 +41,9 @@ Inputs {.sidebar}
 ### Input Parameters
 
 ```{r eruptions, echo=FALSE}
+ address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
+raw_data <- read.csv(address)
+
 inputPanel(
   # x range selection
  pickerInput(
@@ -132,7 +135,7 @@ Timothy Bedard: Sidebar, datatable, and structure
 
 Jay Mandavilli: predictive models
 
-Tori Rose:filtered data: selection, table, visualization
+Tori Rose:filtered data: range selection, filtered table + visualization, predictive toolbar
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
@@ -149,7 +152,7 @@ This app was designed as a project and should not be used for medical diagnoses.
 Arora, M., & Sharma, E. A. (2016). Chronic Kidney Disease Detection by Analyzing Medical Datasets in Weka. International Journal of Computer Application, 6(4), 20–26.
 
 
-### Data
+### Raw Data Statistics
 
 ```{r}
 
@@ -160,11 +163,6 @@ macroFeats <- function(x) {
 # data table and formatting
 address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
 raw_data <- read.csv(address)
-
-```
-### Filtered Data Table
-
-```{r}
 
 show_df = data.frame(sapply(raw_data, macroFeats))
 show_df_transpose <- as.data.frame(t(as.matrix(show_df)))
@@ -237,10 +235,11 @@ renderPlot({
           geom_rug(alpha=0.1, size=1.5)+ 
         scale_color_gradient(low="blue", high="red")
         }
+}
 })
 ```
 
-### Filtered Data
+### Filtered Data Table
 ```{r}
 tableOutput('filtered_entries')
 
@@ -253,9 +252,6 @@ output$filtered_entries <- renderTable(
   )
 
 ```
-
-
-### Robby's Blog
 
 # Prediction
 
