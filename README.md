@@ -58,7 +58,7 @@ Tori Rose: data filtering and visualization
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
-Robby Waxman: data selection and data pre-processing
+Robby Waxman: data selection and data pre-processing, model performance
 
 
 ## Disclaimer
