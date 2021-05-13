@@ -135,7 +135,7 @@ Timothy Bedard: Sidebar, datatable, and structure
 
 Jay Mandavilli: predictive models
 
-Tori Rose:filtered data: range selection, filtered table + visualization, predictive toolbar
+Tori Rose:filtered data: range selection, filtered table + visualization; predictive toolbar
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
@@ -261,31 +261,36 @@ Inputs {.sidebar}
 ### Input: Parameters
 
 ```{r, echo=FALSE}
+ address <- "https://raw.githubusercontent.com/vrose99/AdvancedDataScienceFinalProject/8acd472133dda8bf77b87648d281237419c7fced/Data/chronic_kidney_disease.csv"
+raw_data <- read.csv(address)
+filtered_data <- raw_data[rowSums(is.na(raw_data[ , 1:25])) == 0, ]
+median_defaults <- apply(filtered_data,2,median)
+
 inputPanel(
- numericInput("age", label = h3("Age for predict:"), value = 1),
- numericInput("bp", label = h3("BP for predict:"), value = 1),
- numericInput("sg", label = h3("SG for predict:"), value = 1),
- numericInput("al", label = h3("AL for predict:"), value = 1),
- numericInput("su", label = h3("SU for predict:"), value = 1),
- numericInput("rbc", label = h3("RBC for predict:"), value = 1),
- numericInput("pc", label = h3("PC for predict:"), value = 1),
- numericInput("pcc", label = h3("PCC for predict:"), value = 1),
- numericInput("ba", label = h3("BA for predict:"), value = 1),
- numericInput("bgr", label = h3("BGR for predict:"), value = 1),
- numericInput("bu", label = h3("BU for predict:"), value = 1),
- numericInput("sc", label = h3("SC for predict:"), value = 1),
- numericInput("sod", label = h3("SOD for predict:"), value = 1),
- numericInput("pot", label = h3("POT for predict:"), value = 1),
- numericInput("hemo", label = h3("Hemo for predict:"), value = 1),
- numericInput("pcv", label = h3("PCV for predict:"), value = 1),
- numericInput("wbcc", label = h3("WBCC for predict:"), value = 1),
- numericInput("rbcc", label = h3("RBCC for predict:"), value = 1),
- numericInput("htn", label = h3("HTN for predict:"), value = 1),
- numericInput("dm", label = h3("DM for predict:"), value = 1),
- numericInput("cad", label = h3("CAD for predict:"), value = 1),
- numericInput("appet", label = h3("Appet for predict:"), value = 1),
- numericInput("pe", label = h3("PE for predict:"), value = 1),
- numericInput("ane", label = h3("ANE for predict:"), value = 1),
+numericInput("age", label = h3("Age for predict:"), value = median_defaults[1]),
+ numericInput("bp", label = h3("BP for predict:"), value = median_defaults[2]),
+ numericInput("sg", label = h3("SG for predict:"), value = median_defaults[3]),
+ numericInput("al", label = h3("AL for predict:"), value = median_defaults[4]),
+ numericInput("su", label = h3("SU for predict:"), value = median_defaults[5]),
+ numericInput("rbc", label = h3("RBC for predict:"), value = median_defaults[6]),
+ numericInput("pc", label = h3("PC for predict:"), value = median_defaults[7]),
+ numericInput("pcc", label = h3("PCC for predict:"), value = median_defaults[8]),
+ numericInput("ba", label = h3("BA for predict:"), value = median_defaults[9]),
+ numericInput("bgr", label = h3("BGR for predict:"), value = median_defaults[10]),
+ numericInput("bu", label = h3("BU for predict:"), value = median_defaults[11]),
+ numericInput("sc", label = h3("SC for predict:"), value = median_defaults[12]),
+ numericInput("sod", label = h3("SOD for predict:"), value = median_defaults[13]),
+ numericInput("pot", label = h3("POT for predict:"), value = median_defaults[14]),
+ numericInput("hemo", label = h3("Hemo for predict:"), value = median_defaults[15]),
+ numericInput("pcv", label = h3("PCV for predict:"), value = median_defaults[16]),
+ numericInput("wbcc", label = h3("WBCC for predict:"), value = median_defaults[17]),
+ numericInput("rbcc", label = h3("RBCC for predict:"), value = median_defaults[18]),
+ numericInput("htn", label = h3("HTN for predict:"), value = median_defaults[19]),
+ numericInput("dm", label = h3("DM for predict:"), value = median_defaults[20]),
+ numericInput("cad", label = h3("CAD for predict:"), value = median_defaults[21]),
+ numericInput("appet", label = h3("Appet for predict:"), value = median_defaults[22]),
+ numericInput("pe", label = h3("PE for predict:"), value = median_defaults[23]),
+ numericInput("ane", label = h3("ANE for predict:"), value = median_defaults[24]),
 
  actionButton("show", "Predict")
 )
@@ -343,7 +348,7 @@ Timothy Bedard: Sidebar, datatable, and structure
 
 Jay Mandavilli: predictive models
 
-Tori Rose:filtered data: selection, table, visual
+Tori Rose:filtered data: range selection, filtered table + visualization; predictive toolbar
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
