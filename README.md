@@ -47,6 +47,19 @@ Desktop:
 
 See How-To run app section above.
 
+Then, follow the instructions below:
+
+Data Visualization
+1) Select data to display on the left hand side (such as age = 42 to 55)
+2) Click "Display"
+3) Use page tabs to choose what type of visual you wish to see.
+
+Prediction
+1) Click "Prediction" in top tab
+2) Enter data in the left tab to be used in the prediction (such as age = 42)
+3) Click "Predict"
+4) Results displayed in the right panel
+
 
 ## Individual Contributions
 
