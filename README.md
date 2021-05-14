@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project was designed to demonstrate our knowledge of data science which includes obtaining data from a study, pre-processing that data into a usable form, analyzing the data and designing an app that can be powered by the data, creating a shiny web app that uses the data, train a classifier on the data, and finally make a prediction using that classifier. Overall, this process well encapsulates standard procedures with data and visualization that are used to make well-corroborated conclusions that would be reconcluded if the same raw data were given to another group. This is an essential part of data science.
+This project was designed to demonstrate our knowledge of data science which includes obtaining data from a study, pre-processing that data into a usable form, analyzing the data and designing a shiny web app that can be powered by the data, displaying useful figures that describe and filter the data, train a classifier on the data, and finally make a prediction using that classifier. Overall, this process well encapsulates standard procedures with data and visualization that are used to make well-corroborated conclusions that would be reconcluded if the same raw data were given to another group. This is an essential part of data science.
 
 ## Data
 
