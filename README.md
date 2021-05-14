@@ -10,7 +10,7 @@ Our project specifically uses data from 250 participants with chronic kidney dis
 
 ## App Description
 
-Live App Link:
+Live App Link: https://vrose9.shinyapps.io/Chronic_Kidney_Disease_Final/#section-data-overview
 
 This app plots data of patients with Chronic Kidney Disease (CKD) and makes a prediction of CKD given data using a classifying model on the CKD data.
 
