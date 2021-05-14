@@ -63,11 +63,11 @@ Prediction
 
 ## Individual Contributions
 
-Timothy Bedard: 
+Timothy Bedard: Sidebar, datatable, and structure
 
 Jay Mandavilli: predictive models
 
-Tori Rose: data filtering and visualization
+Tori Rose: filtered data: range selection, filtered table + visualization; predictive toolbar
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
