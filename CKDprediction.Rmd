@@ -97,7 +97,7 @@ Our project specifically uses data from 250 participants with chronic kidney dis
 
 **App Description**
 
-Live App Link:
+Live App Link: https://vrose9.shinyapps.io/Chronic_Kidney_Disease_Final/#section-data-overview
 
 This app plots data of patients with Chronic Kidney Disease (CKD) and makes a prediction of CKD given data using a classifying model on the CKD data.
 
@@ -110,11 +110,11 @@ System Requirements/Environments: This App compiled with RStudio.cloud but will 
 
 Data Visualization
 
-1) Select data to display on the left hand side
+1) Select data filters on the left hand side
 
-2) Click "Display"
+2) Select styles (linear, logarithmic, etc) on the left hand side
 
-3) Use page tabs to choose what type of visual you wish to see.
+3) Use page tabs to choose what type of visual you wish to see (table, chart, etc)
 
 
 Prediction
@@ -123,7 +123,7 @@ Prediction
 
 2) Enter data in the left tab to be used in the prediction
 
-3) Click "Predict"
+3) Click "Predict" and go to the "Predict" tab
 
 4) Results displayed in the right panel
 
@@ -302,7 +302,7 @@ Column {.tabset}
 ### About / How-to
 **Introduction**
 
-This project was designed to demonstrate our knowledge of data science which includes obtaining data from a study, pre-processing that data into a usable form, analyzing the data and designing an app that can be powered by the data, creating a shiny web app that uses the data, train a classifier on the data, and finally make a prediction using that classifier. Overall, this process well encapsulates standard procedures with data and visualization that are used to make well-corroborated conclusions that would be reconcluded if the same raw data were given to another group. This is an essential part of data science.
+This project was designed to demonstrate our knowledge of data science which includes obtaining data from a study, pre-processing that data into a usable form, analyzing the data and designing a shiny web app that can be powered by the data, displaying useful figures that describe and filter the data, train a classifier on the data, and finally make a prediction using that classifier. Overall, this process well encapsulates standard procedures with data and visualization that are used to make well-corroborated conclusions that would be reconcluded if the same raw data were given to another group. This is an essential part of data science.
 
 **Data**
 
