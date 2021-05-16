@@ -14,9 +14,10 @@ Live App Link: https://vrose9.shinyapps.io/Chronic_Kidney_Disease_Final/#section
 
 This app plots data of patients with Chronic Kidney Disease (CKD) and makes a prediction of CKD given data using a classifying model on the CKD data.
 
-Package requirements: methods, stats, utils, grDevices, graphics, datasets, base, flexdashboard, shiny, leaflet, reshape2, tidyverse, shinyWidgets, dygraphs, magrittr, dplyr, ggplot2, plotly
+Package requirements: methods(4.0.3), stats(4.0.3), utils(4.0.3), grDevices(4.0.3), graphics(4.0.3), datasets(4.0.3), base(4.0.3), flexdashboard(0.5.2), shiny(1.6.0), leaflet(2.0.4.1), reshape2(1.4.4), tidyverse(1.3.0), shinyWidgets(0.6.0), dygraphs(1.1.1.6), magrittr(2.0.1), dplyr(1.0.5), ggplot2(3.3.3), plotly(4.9.3), randomForest(4.6-14), DT(0.17), ROCR(1.0-11)
 
-System Requirements/Environments: This App compiled with RStudio.cloud but will also work with desktop versions of RStudio.
+System Requirements/Environments: This App compiled in R (4.0.3) with RStudio.cloud but will also work with desktop versions of RStudio.
+
 
 How-to-Use Documentation provided in the app (see app link above).
 
@@ -67,7 +68,7 @@ Timothy Bedard: Sidebar, datatable, and structure
 
 Jay Mandavilli: predictive models
 
-Tori Rose: filtered data: range selection, filtered table + visualization; predictive toolbar
+Tori Rose:filtered data: range selection, filtered table + visualization; predictive toolbar
 
 Benjamin Straus: readme, app description and how-tos, documentation page
 
